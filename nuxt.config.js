@@ -1,22 +1,7 @@
-import config from './config'
-const { axios } = config
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
-  server: {
-    port: process.env.PORT || 8000,
-    host: process.env.HOST || 'localhost',
-  },
-  publicRuntimeConfig: {
-    axios: {
-      baseURL: axios.baseURL,
-    },
-    apiKey: process.env.API_KEY,
-  },
-  privateRuntimeConfig: {
-    apiKey: process.env.API_KEY,
-  },
-
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'book-management-ui',
