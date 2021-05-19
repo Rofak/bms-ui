@@ -19,6 +19,7 @@
   import { mapGetters } from 'vuex'
   export default {
     layout: 'header',
+    middleware:'auth',
     data() {
       return {
         title:''
@@ -35,8 +36,13 @@
       }
     },
     async mounted() {
-      const categories = await fetch('http://localhost:3001/categories').then(res => res.json())
+      const categories = await fetch('http://localhost:3001/categories',{
+        headers:{
+          'Authorization':this.$auth.strategy.token.get()
+        }
+      }).then(res => res.json())
       this.$store.commit('category/setCategories',categories)
+      console.log(this.$auth.loggedIn)
     }
   }
 </script>

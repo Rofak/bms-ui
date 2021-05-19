@@ -34,7 +34,11 @@
     },
 
     async mounted() {
-      this.book = await fetch('http://localhost:3001/books/'+this.$route.params.id).then(res => res.json())
+      this.book = await fetch('http://localhost:3001/books/' + this.$route.params.id, {
+        headers: {
+          'Authorization': this.$auth.strategy.token.get()
+        }
+      }).then(res => res.json())
     }
   }
 </script>

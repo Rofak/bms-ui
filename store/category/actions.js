@@ -2,6 +2,10 @@ export default {
   addCategory({commit,dispatch}, title) {
     this.$axios.$post('http://localhost:3001/categories', {
       title: title
+    },{
+      headers:{
+        'Authorization':this.$auth.strategy.token.get()
+      }
     }).then(async (res) => {
       const categories =await dispatch('getCategoryFromAPI')
         commit('setCategories',categories )
@@ -9,7 +13,11 @@ export default {
   },
 
    getCategoryFromAPI() {
-    return  fetch('http://localhost:3001/categories').then(res => res.json())
+    return  fetch('http://localhost:3001/categories',{
+      headers:{
+        'Authorization':this.$auth.strategy.token.get()
+      }
+    }).then(res => res.json())
   },
 
   deleteCategory({ commit,dispatch }, payload) {

@@ -67,6 +67,7 @@
 <script>
   export default {
     layout: 'header',
+    middleware:'auth',
     data: () => ({
       valid: false,
       previewImage: null,
@@ -88,7 +89,11 @@
       thumbnail:''
     }),
     async fetch() {
-      this.items = await fetch('http://localhost:3001/categories').then((res) =>
+      this.items = await fetch('http://localhost:3001/categories',{
+        headers:{
+          'Authorization':this.$auth.strategy.token.get()
+        }
+      }).then((res) =>
         res.json()
       )
     },
